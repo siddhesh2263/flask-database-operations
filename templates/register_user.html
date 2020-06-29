@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register User</title>
+</head>
+<body>
+
+    <form action="/register" method="POST">
+
+        <label for="ssn_id">SSN ID</label>
+        <input type="number" name="ssn_id" id="ssn_id">
+        <br><br>
+
+        <label for="name">Name</label>
+        <input type="text" name="name" id="name">
+        <br><br>
+
+        <label for="age">Age</label>
+        <input type="number" name="age" id="age">
+        <br><br>
+
+        <label for="date">Date</label>
+        <input type="date" name="date" id="date">
+        <br><br>
+
+        <label for="address">Address</label>
+        <textarea name="address" id="address" cols="30" rows="10"></textarea>
+        <br><br>
+
+        <label for="state">State</label>
+        <select name="state" id="state">
+            <option value="Thane">Thane</option>
+            <option value="Ghatkopar">Ghatkopar</option>
+            <option value="Vile Parler">Vile Parler</option>
+        </select>
+
+        <input type="submit" name="register" id="register" value="Register">
+
+    </form>
+    
+</body>
+</html>

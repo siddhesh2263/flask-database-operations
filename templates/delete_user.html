@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Delete User</title>
+</head>
+<body>
+
+    <form action="/delete" method="POST">
+
+        <label for="id">ID</label>
+        <input type="number" id="id" name="id">
+        <br><br>
+
+        <input type="submit" name="action[]" value="Get ID">
+
+        <br><br>
+        
+        {% if id_matched %}
+
+            <label for="ssn_id">SSN ID</label>
+            <input type="number" name="ssn_id" id="ssn_id" disabled value="{{ user.ssn_id }}">
+            <br><br>
+
+            <label for="name">Name</label>
+            <input type="text" name="name" id="name" disabled value="{{ user.name }}">
+            <br><br>
+
+            <label for="age">Age</label>
+            <input type="number" name="age" id="age" disabled value="{{ user.age }}">
+            <br><br>
+
+            <label for="date">Date</label>
+            <input type="date" name="date" id="date" disabled value="{{ user.date }}">
+            <br><br>
+
+            <label for="address">Address</label>
+            <textarea name="address" id="address" cols="30" rows="10" disabled>{{ user.address }}</textarea>
+            <br><br>
+
+            <label for="name">State</label>
+            <input type="text" name="state" id="state" disabled value="{{ user.state }}">
+            <br><br>
+
+            <input type="submit" name="action[]" value="Delete">
+
+        {% else %}
+
+            <label for="ssn_id">SSN ID</label>
+            <input type="number" name="ssn_id" id="ssn_id" disabled>
+            <br><br>
+
+            <label for="name">Name</label>
+            <input type="text" name="name" id="name" disabled>
+            <br><br>
+
+            <label for="age">Age</label>
+            <input type="number" name="age" id="age" disabled>
+            <br><br>
+
+            <label for="date">Date</label>
+            <input type="date" name="date" id="date" disabled>
+            <br><br>
+
+            <label for="address">Address</label>
+            <textarea name="address" id="address" cols="30" rows="10" disabled></textarea>
+            <br><br>
+
+            <label for="name">State</label>
+            <input type="text" name="state" id="state" disabled>
+            <br><br>
+
+            <input type="submit" name="action[]" value="Delete" disabled>
+
+        {% endif %}
+
+    </form>
+
+    {% if message %}
+        <h2>{{ message }}</h2>
+    {% endif %}
+    
+</body>
+</html>

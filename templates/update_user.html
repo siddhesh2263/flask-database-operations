@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Update User</title>
+</head>
+<body>
+
+    <form action="/update" method="POST">
+
+        <label for="id">ID</label>
+        <input type="number" id="id" name="id" placeholder="{% if id_matched %}{{ id_matched }}{% else %}{{ ID }}{% endif %}">
+        <br><br>
+
+        <input type="submit" name="action[]" value="Get ID">
+
+        <br><br>
+        
+        {% if id_matched %}
+
+            <label for="ssn_id">SSN ID</label>
+            <input type="number" name="ssn_id" id="ssn_id" value="{{ user.ssn_id }}">
+            <br><br>
+
+            <label for="name">Name</label>
+            <input type="text" name="name" id="name" value="{{ user.name }}">
+            <br><br>
+
+            <label for="age">Age</label>
+            <input type="number" name="age" id="age" value="{{ user.age }}">
+            <br><br>
+
+            <label for="date">Date</label>
+            <input type="date" name="date" id="date" value="{{ user.date }}">
+            <br><br>
+
+            <label for="address">Address</label>
+            <textarea name="address" id="address" cols="30" rows="10">{{ user.address }}</textarea>
+            <br><br>
+
+            <label for="state">State</label>
+            <select name="state" id="state" value="{{ user.state }}">
+                <option value="Thane">Thane</option>
+                <option value="Ghatkopar">Ghatkopar</option>
+                <option value="Vile Parler">Vile Parler</option>
+            </select>
+            <br><br>
+
+            <input type="submit" name="action[]" value="Update">
+
+        {% else %}
+
+            <label for="ssn_id">SSN ID</label>
+            <input type="number" name="ssn_id" id="ssn_id" disabled>
+            <br><br>
+
+            <label for="name">Name</label>
+            <input type="text" name="name" id="name" disabled>
+            <br><br>
+
+            <label for="age">Age</label>
+            <input type="number" name="age" id="age" disabled>
+            <br><br>
+
+            <label for="date">Date</label>
+            <input type="date" name="date" id="date" disabled>
+            <br><br>
+
+            <label for="address">Address</label>
+            <textarea name="address" id="address" cols="30" rows="10" disabled></textarea>
+            <br><br>
+
+            <label for="name">State</label>
+            <input type="text" name="state" id="state" disabled>
+            <br><br>
+
+            <input type="submit" name="action[]" value="Delete" disabled>
+
+        {% endif %}
+
+    </form>
+
+    {% if message %}
+        <h2>{{ message }}</h2>
+    {% endif %}
+    
+</body>
+</html>
