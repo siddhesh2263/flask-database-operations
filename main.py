@@ -18,9 +18,12 @@ def index():
     return render_template('index.html')
 
 
+# **********************************************************
+
+# Register operation
+
 @app.route('/register', methods=["GET", "POST"])
 def register():
-
     if request.method == "GET":
         return render_template('register_user.html')
 
@@ -38,79 +41,66 @@ def register():
 
     return redirect(url_for('register'))
 
+# ************************************************************
+
+# Delete operation
 
 @app.route('/delete', methods=["GET", "POST"])
 def delete():
-
     if request.method == "GET":
-        print('1')
         return render_template('delete_user.html')
     
-    print('2')
     actions = request.form.getlist('action[]')
     id_matched = request.form.get('id')
 
     if actions[0] == "Delete" or len(id_matched) == 0:
-        print('3')
         c_id = Temp.query.order_by(desc(Temp.date_posted)).all()
         current_id = c_id[0].store_id
-        print('Current ID: *********************************', current_id)
         delete_user = User.query.filter_by(id=current_id).first()
-        print('4')
     else:
         delete_user = User.query.filter_by(id=id_matched).first()
 
     if delete_user:
-        print('5')
         new_id = Temp(store_id=id_matched)
         db.session.add(new_id)
         db.session.commit()
         if actions[0] == "Get ID":
-            print('6')
             print('User found')
             return render_template('delete_user.html', id_matched=id_matched, user=delete_user)
-        print('7')
         db.session.delete(delete_user)
         db.session.commit()
         print('User deleted')
         return redirect(url_for('delete'))
     else:
-        print('8')
         print('User not found')
         return redirect(url_for('delete'))
 
+# **************************************************************
+
+# Update operation
 
 @app.route('/update', methods=["GET", "POST"])
 def update():
-
     if request.method == "GET":
-        print('1')
         return render_template('update_user.html')
     
-    print('2')
     actions = request.form.getlist('action[]')
     id_matched = request.form.get('id')
 
     if actions[0] == "Update" or len(id_matched) == 0:
-        print('3')
         c_id = Temp.query.order_by(desc(Temp.date_posted)).all()
         current_id = c_id[0].store_id
-        print('Current ID: *********************************', current_id)
         update_user = User.query.filter_by(id=current_id).first()
-        print('4')
     else:
         update_user = User.query.filter_by(id=id_matched).first()
 
     if update_user:
-        print('5')
         new_id = Temp(store_id=id_matched)
         db.session.add(new_id)
         db.session.commit()
         if actions[0] == "Get ID":
-            print('6')
             print('User found')
             return render_template('update_user.html', id_matched=id_matched, user=update_user)
-        print('7')
 
         update_user.ssn_id = int(request.form.get('ssn_id'))
         update_user.name = request.form.get('name')
@@ -122,8 +112,6 @@ def update():
         print('User updated')
         return redirect(url_for('update'))
     else:
-        print('8')
-        print('User not found')
         return redirect(url_for('update'))
 
 
